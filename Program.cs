@@ -1,7 +1,23 @@
+using Microsoft.EntityFrameworkCore;
+using bank.Data;
+using bank.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// builder.Services.AddDbContext<BankDbContext>(options=>
+// {
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("BankConn"));
+// }); 
+
+builder.Services.AddDbContext<BankDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("BankConn")));
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 var app = builder.Build();
 
