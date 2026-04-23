@@ -39,5 +39,15 @@ namespace bank.Repository
         {
             Context.SaveChanges();
         }
+
+        public Account GetAccountById(int id)
+        {
+            return Context.Accounts
+                .Include(a => a.Customer)
+                .Include(a => a.Transactions)
+                .FirstOrDefaultAsync(a => a.AccountId == id);
+        }
+
+
     }
     }

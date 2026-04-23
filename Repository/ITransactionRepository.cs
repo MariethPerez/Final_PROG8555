@@ -11,5 +11,6 @@ namespace bank.Repository
         public Transaction GetById(int id);
         public List<Transaction> GetAll();
         public void Save();
+        public  List<Transaction> GetTransactionsByAccountId(int id);
     }
 }

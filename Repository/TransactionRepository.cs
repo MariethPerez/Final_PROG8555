@@ -39,5 +39,13 @@ namespace bank.Repository
         {
             Context.SaveChanges();
         }
+
+        public  List<Transaction> GetTransactionsByAccountId(int id)
+        {
+            return await Context.Transactions
+                .Where(t => t.AccountId == id)
+                .OrderByDescending(t => t.TransactionDate)
+                .ToListAsync();
+        }
     }
     }
